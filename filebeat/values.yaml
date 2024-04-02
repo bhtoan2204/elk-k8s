@@ -47,7 +47,7 @@ daemonset:
                 logs_path: "/var/log/containers/"
 
       output.logstash:
-        hosts: ["logstash-logstash:5044}"]
+        hosts: ["logstash-logstash:5044"]
         username: '${ELASTICSEARCH_USERNAME}'
         password: '${ELASTICSEARCH_PASSWORD}'
         protocol: https

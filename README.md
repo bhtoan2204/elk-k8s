@@ -37,3 +37,8 @@ $ helm upgrade --install ingress-nginx ingress-nginx \
   --repo https://kubernetes.github.io/ingress-nginx \
   --namespace ingress-nginx --create-namespace
 ```
+
+## Clone project
+```bash
+$ git clone https://github.com/bhtoan2204/elk-k8s
+```
