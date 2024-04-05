@@ -9,7 +9,6 @@ spec:
   selector:
     matchLabels:
       node.type: kibana-node
-  strategy: {}
   template:
     metadata:
       labels:
@@ -18,20 +17,24 @@ spec:
       containers:
         - env:
             - name: ELASTICSEARCH_HOSTS
-              value: http://es-service:9200
+              value: "http://es-service:9200"
+            - name: ELASTICSEARCH_USERNAME
+              value: "elastic"
+            - name: ELASTICSEARCH_PASSWORD
+              value: "Toan123456789"
           image: docker.elastic.co/kibana/kibana:7.17.0
           readinessProbe:
             exec:
               command:
-              - curl
-              - localhost:5601/api/status
+                - curl
+                - localhost:5601/api/status
             initialDelaySeconds: 30
             periodSeconds: 10
           livenessProbe:
             exec:
               command:
-              - curl
-              - localhost:5601/api/status
+                - curl
+                - localhost:5601/api/status
             initialDelaySeconds: 30
             periodSeconds: 10
           name: kibana
