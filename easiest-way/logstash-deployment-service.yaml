@@ -3,7 +3,6 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: logstash-yaml-config
-  namespace: elk
   labels:
     k8s-app: logstash
 data:
@@ -16,7 +15,6 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: logstash-conf-config
-  namespace: elk
   labels:
     k8s-app: logstash
 data:
@@ -36,8 +34,10 @@ data:
       output 
       {
           elasticsearch { 
-              hosts => ["es-service:9200"] 
-            }
+              hosts => ["es-service:9200"]
+              user => "elastic"
+              password => "Toan123456789"
+          }
 
       }
 
@@ -46,7 +46,6 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: logstash
-  namespace: elk
   labels:
     k8s-app: logstash
     app: logstash
@@ -76,7 +75,7 @@ spec:
           - name: logstash-yaml
             mountPath: /usr/share/logstash/config/logstash.yml
             readOnly: true
-            subPath: logstash.yml  
+            subPath: logstash.yml 
         ports:
             - containerPort: 5400    
       volumes:
@@ -95,7 +94,6 @@ metadata:
   labels:
     logstash.service: logstash-service
   name: logstash-service
-  namespace: elk
 spec:
   ports:
     - name: "5400"
