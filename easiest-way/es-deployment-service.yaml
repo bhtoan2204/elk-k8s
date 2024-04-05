@@ -57,12 +57,15 @@ metadata:
     es.service: es-service
   name: es-service
 spec:
+  type: NodePort
   ports:
     - name: "9200"
       port: 9200
       targetPort: 9200
+      nodePort: 30038
     - name: "9300"
       port: 9300
       targetPort: 9300
+      nodePort: 30039
   selector:
     node.type: es-node-master

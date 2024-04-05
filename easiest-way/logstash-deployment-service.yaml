@@ -95,10 +95,12 @@ metadata:
     logstash.service: logstash-service
   name: logstash-service
 spec:
+  type: NodePort
   ports:
     - name: "5400"
       port: 5400
       targetPort: 5400
+      nodePort: 30037
   selector:
     node.type: logstash-node
 
